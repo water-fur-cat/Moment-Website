@@ -1,0 +1,69 @@
+* {
+  box-sizing: border-box;
+}
+
+/* Add a gray background color with some padding */
+body {
+  font-family: Arial;
+  padding: 20px;
+  background: #f1f1f1;
+}
+
+/* Header/Blog Title */
+.header {
+  padding: 30px;
+  font-size: 40px;
+  text-align: center;
+  background: white;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.moments {
+  /*margin: center;*/
+  width: 72.22%;
+  margin:0 auto;
+  justify-content: center;
+}
+
+/* Fake image */
+.fakeimg {
+  background-color: #aaa;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Add a card effect for articles */
+.moment {
+   background-color: white;
+   margin-top: 20px;
+}
+
+/* Footer */
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #ddd;
+  margin-top: 20px;
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .moments, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+
+#header {
+  /* Background pattern from Toptal Subtle Patterns */
+  background: url("../images/background.jpg")no-repeat center;
+  background-size: contain;
+  width: 72.22%;
+  margin:0 auto;
+}
+
+.row {
+  width: 100%;
+  justify-content: center;
+}

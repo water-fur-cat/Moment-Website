@@ -1,0 +1,5 @@
+cron:
+  - description: "Health check"
+    url: /tasks/health_check
+    schedule: every 60 mins
+    target: tasks

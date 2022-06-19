@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Moments</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../static/css/moments.css">
+
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+<div>
+  <img url="../static/images/upload.png", alt="avator">
+  <button type="button" onclick="redirectToNewMoment()">New Moment</button>
+  <button type="button" onclick="redirectToProfile()">Profile</button>
+</div>
+
+<div class="header" id="header">
+  <h2>Moments</h2>
+</div>
+
+<div class="row">
+  <div class="moments">
+    <div class="moment">
+      <img src="" alt="avator">
+      <h5>Username</h5>
+      <p>Some text..</p>
+      <div class="fakeimg" style="height:200px;">Image</div>
+      <h5>timestamp, Dec 7, 2017</h5>
+    </div>
+  </div>
+</div>
+
+<div hidden className="container-login">
+  <div className="wrap-login">
+   <div className="login-form">
+    <span className="login-form-title">
+     Change {changeItem}
+     <br/> 
+     <a>Fill the form and change your {item}!</ a>
+    </span>
+    <div className="wrap-input">
+                       <label className="input">New {changeItem}</label>
+     <input id="change-username" className="input" type="text" name={item} onChange={this.props.itemChangeHandler}/>
+    </div>
+    <div className="container-login-form-btn">
+     <button id="change-username-btn" className="login-form-login-btn" onClick={this.props.changeItemHandler}>
+      Change {changeItem}
+     </button>
+    </div>
+    <ul className="change-more">
+        <li>
+            <span className="txt1">Don't want a change? </span>
+            <a id="login-signup" className="txt2" onClick={this.props.noChangeHandler}>Go Back</ a>
+        </li>
+    </ul>
+   </div>
+  </div>
+</div>
+
+<div class="d-flex">
+  <div class="flex-shrink-0">
+      <img src="../static/images/me.png" alt="Sample Image">
+  </div>
+  <div class="flex-grow-1 ms-3">
+      <h5>Jhon Carter <small class="text-muted"><i>Posted on January 10, 2021</i></small></h5>
+      <p>Excellent feature! I love it. One day I'm definitely going to put this Bootstrap component into use and I'll let you know once I do.</p>
+  </div>
+</div>
+
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function redirectToNewMoment() {
+    window.location.href = "{{ url_for('moment_creation') }}";
+  }
+
+  function redirectToProfile() {
+    window.location.href = "{{ url_for('profile', id=session['user_id']) }}";
+  }
+</script>
+</body>
+</html>

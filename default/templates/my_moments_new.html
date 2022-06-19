@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Moment</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/script_moment.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+    />
+  </head>
+  <body onload="get_personal_Feeds()">
+    <!-- sidebar starts -->
+    <div class="sidebar">
+      <i class="fab fa-twitter"></i>
+      <img src="/static/images/me.png" id="avator-pic">
+      <h3 id="username-siderbar"></h3>
+      <div class="sidebarOption active">
+        <span class="material-icons"> home </span>
+        <p><a href="{{ url_for('home') }}">Home</a></p>
+        <!-- <h2><a href="{ url_for('my_moment_pages',id = user_id) }"></a></h2> -->
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> perm_identity </span>
+        <p><a href="{{ url_for('profile',id=user_id) }}">Profile</a></p>
+        <!-- <h2><a href="{ url_for('profile'),id=user_id}">Profile</a></h2> -->
+      </div>
+
+      <div class="sidebarOption">
+        <span class="material-icons"> notifications_none </span>
+        <p><a href="{{ url_for('logout',id=user_id) }}">Log out</a></p>
+      </div>
+      
+      <div class="sidebarOption">
+        <span class="material-icons"> more_horiz </span>
+        <h2>No More</h2>
+      </div>
+      <button class="sidebar__tweet"><a href="{{ url_for('moment_creation') }}">New Moment</a></button>
+    </div>
+    <!-- sidebar ends -->
+
+    <!-- feed starts -->
+    <div class="feed">
+      <div class="feed__header">
+        <h2>My Personal Moment</h2>
+      </div>
+
+      <!-- tweetbox starts -->
+      <div class="tweetBox">
+        <form>
+          <div class="tweetbox__input">
+            <img
+              src="https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png"
+              alt=""
+            />
+            <input type="text" placeholder="In Maintenance." />
+          </div>
+          <button class="tweetBox__tweetButton">Send</button>
+        </form>
+      </div>
+      <!-- tweetbox ends -->
+
+      <!-- post starts -->
+      <div id="moments-container">
+      </div>
+      <!-- post ends -->
+    </div>
+    <!-- feed ends -->
+
+    <!-- widgets starts -->
+    <div class="widgets">
+      <div class="widgets__input">
+        <span class="material-icons widgets__searchIcon"> search </span>
+        <input type="text" placeholder="Cannot Search Now" />
+      </div>
+
+      <div class="widgets__widgetContainer">
+        <h2>What's happening?</h2>
+        <blockquote class="twitter-tweet">
+          <p lang="en" dir="ltr">
+            This page is under maintenance, please try again later.
+            We apologize for the inconvenience caused to you.
+          </p>
+          &mdash; Backend Group of the DZZ (@DZZ)
+          <a href="https://www.corgiorgy.com/"
+            >May 26, 2022</a
+          >
+        </blockquote>
+        <!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script> -->
+      </div>
+    </div>
+    <!-- widgets ends -->
+    <p id="user-id" hidden>{{ user_id }}</p>
+  </body>
+</html>

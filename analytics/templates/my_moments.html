@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../static/css/moments.css">
+</head>
+<body>
+
+<div>
+  <img url="", alt="avator">
+  <button type="button">New Moment</button>
+  <button type="button">Back to home</button>
+</div>
+
+<div class="header" id="header">
+  <h2>Moments</h2>
+</div>
+
+<div class="row">
+  <div class="moments">
+    <div class="moment">
+      <img src="" alt="avator">
+      <h5>Username</h5>
+      <p>Some text..</p>
+      <div class="fakeimg" style="height:200px;">Image</div>
+      <h5>timestamp, Dec 7, 2017</h5>
+      <button type="button">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div hidden className="container-login">
+  <div className="wrap-login">
+   <div className="login-form">
+    <span className="login-form-title">
+     Change {changeItem}
+     <br/> 
+     <a>Fill the form and change your {item}!</ a>
+    </span>
+    <div className="wrap-input">
+                       <label className="input">New {changeItem}</label>
+     <input id="change-username" className="input" type="text" name={item} onChange={this.props.itemChangeHandler}/>
+    </div>
+    <div className="container-login-form-btn">
+     <button id="change-username-btn" className="login-form-login-btn" onClick={this.props.changeItemHandler}>
+      Change {changeItem}
+     </button>
+    </div>
+    <ul className="change-more">
+        <li>
+            <span className="txt1">Don't want a change? </span>
+            <a id="login-signup" className="txt2" onClick={this.props.noChangeHandler}>Go Back</ a>
+        </li>
+    </ul>
+   </div>
+  </div>
+</div>
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+
+</body>
+</html>

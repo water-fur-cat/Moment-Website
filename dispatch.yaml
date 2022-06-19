@@ -1,0 +1,13 @@
+dispatch:
+
+- url: "mymemo-final-project-dzz.uc.r.appspot.com/"
+  service: default
+
+- url: "*/analytics/*"
+  service: analytics
+
+#- url: "*/api/*"
+#  service: api
+
+- url: "*/tasks/*"
+  service: tasks

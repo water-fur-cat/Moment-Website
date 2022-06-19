@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Moments</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href={{ url_for('static', filename='css/moments.css') }}>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href={{ url_for('static', filename='css/profile.css') }}>
+</head>
+
+<body>
+
+  <div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+              <form hidden id="image-form" enctype="multipart/form-data" action="{{ url_for('profile', id=session['user_id']) }}" method="post">
+                <input id="upload-input" name="avatar" type="file" accept="image/jpg, image/png" onchange="updateImg(this)" hidden>
+              </form>
+              <img class="rounded-circle mt-5" id="avatar" width="150px" src="{{ personalInfo.get('photo_url') }}">
+              <span class="font-weight-bold">{{ personalInfo.get('name','') }}</span>
+              <br>
+              <button class="btn btn-primary profile-button" id="edit-photo" type="button" onclick="editPhoto()">Edit Photo</button>
+            </div>
+            <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button" onclick="redirectToHome()">Back To Home</button></div>
+          </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <form id="profile-form" enctype="multipart/form-data" action="{{ url_for('profile', id=session['user_id']) }}" method="post">
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">Name</label><input type="text" class="form-control" name="nick_name" readonly="true" placeholder="Enter nickname" value="{{ personalInfo.get('nick_name','') }}"></div>
+                    <div class="col-md-12"><label class="labels">Password</label><input type="password" class="form-control" name="password" readonly="true" placeholder="***********" value=""></div>
+                    <div class="col-md-12"><label class="labels">Gender</label><input type="text" class="form-control" name="gender" readonly="true" placeholder="Enter Gender" value="{{ personalInfo.get('gender','') }}"></div>
+                    <div class="col-md-12"><label class="labels">Age</label><input type="text" class="form-control" name="age" readonly="true" placeholder="Enter age" value="{{ personalInfo.get('age','') }}"></div>
+                    <div class="col-md-12"><label class="labels">Mobile</label><input type="text" class="form-control" name="contact" readonly="true" placeholder="Enter phone number" value="{{ personalInfo.get('contact','') }}"></div>
+                    <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control" name="email" readonly="true" placeholder="Enter email address" value="{{ personalInfo.get('email','') }}"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" name="country" readonly="true" placeholder="Country" value="{{ personalInfo.get('country','') }}"></div>
+                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" name="region" readonly="true" placeholder="State/Region" value="{{ personalInfo.get('region','') }}"></div>
+                </div>
+                </form>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" id="edit-profile" type="button" onclick="editProfile()">Edit Profile</button></div>
+                <div class="mt-5 text-center"><button hidden="true" class="btn btn-primary profile-button" id="save-profile" type="button" onclick="saveProfile()">Save Profile</button></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<script>
+
+// shortcuts to elements
+var edit_profile_button = document.getElementById('edit-profile');
+var save_profile_button = document.getElementById('save-profile');
+  function updateImg(input) {
+    showImg(input);
+
+    var form = document.getElementById('image-form');
+    
+    var form_data = new FormData(form);
+
+    const url = form.action;
+
+    var req = new XMLHttpRequest();
+    req.open("POST", url, true);
+    req.send(form_data);
+  }
+
+  function showImg(input) {
+      var file = input.files[0];
+      var reader = new FileReader()
+      reader.onload = function(e) {
+          document.getElementById('avatar').src=e.target.result
+      }
+      reader.readAsDataURL(file)
+  }
+
+  function goBack() {
+    window.history.back()
+  }
+
+  function redirectToHome() {
+    window.location.href = "{{ url_for('home') }}";
+  }
+
+  function editProfile() {
+    var elements = document.getElementsByClassName("form-control");
+    for (var i=0, len=elements.length; i < len; i=i+1) {
+      elements[i].removeAttribute('readonly');
+    }
+    edit_profile_button.setAttribute('hidden', 'true');
+    save_profile_button.removeAttribute('hidden');
+  }
+
+  function saveProfile() {
+    var elements = document.getElementsByClassName("form-control");
+    for (var i=0, len=elements.length; i < len; i=i+1) {
+      elements[i].setAttribute('readonly', 'true');
+    }
+    save_profile_button.setAttribute('hidden', 'true');
+    edit_profile_button.removeAttribute('hidden');
+    uploadProfile();
+  }
+
+  function editPhoto() {
+    document.getElementById("upload-input").click();
+  }
+
+  function uploadProfile() {
+    var form_data = new FormData();
+    
+    var data = {}
+    
+    var elements = document.getElementsByClassName("form-control");
+    for (var i=0, len=elements.length; i < len; i=i+1) {
+      data[elements[i].name] = elements[i].value;
+    }
+    form_data.append('data', JSON.stringify(data));
+
+    var form = document.getElementById('profile-form');
+    const url = form.action;
+
+    var req = new XMLHttpRequest();
+    req.open("POST", url, true);
+    req.send(form_data);
+  }
+
+</script>
+
+</body>
+</html>
